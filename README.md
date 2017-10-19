@@ -1,2 +1,2 @@
 # docker-ngsolve
-mix-in image for our testing infrastructing
+mix-in image for our testing infrastructure
