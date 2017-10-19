@@ -1,16 +1,17 @@
-PYTHONS = 2.7 3.5 3.6 3.7-rc
+PYTHONS = 3.5 3.6 3.7-rc
 
-.PHONY: pythons $(PYTHONS) ngsolve
+NGSOLVE_VERSION=v6.2.1709
+
+.PHONY: pythons $(PYTHONS)
 
 pythons: $(PYTHONS)
 
-ngsolve:
-	docker build -t pymor/ngsolve:v6.2.1709 .
-
-$(PYTHONS): 
-	echo docker build -t pymor/ngsolve:py$@_v6.2.1709 .
+$(PYTHONS):
+	docker build --build-arg PYVER=$@ \
+		--build-arg NGSOLVE_VERSION=$(NGSOLVE_VERSION) \
+		-t pymor/ngsolve:py$@_$(NGSOLVE_VERSION) .
 
 push:
 	docker push pymor/ngsolve
 
-all: ngsolve
+all: 3.5
