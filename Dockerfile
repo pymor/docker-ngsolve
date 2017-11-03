@@ -9,7 +9,9 @@ MAINTAINER René Milk <rene.milk@wwu.de>
 
 ARG NGSOLVE_VERSION=v6.2.1709
 
-RUN apt-get update && \
+RUN echo "deb http://cloudfront.debian.net/debian/ stretch main contrib\n\
+deb http://cloudfront.debian.net/debian-security/ stretch/updates main contrib" >> /etc/apt/sources.list && \
+    apt-get update && \
     apt-get -y install libxmu-dev tk-dev tcl-dev cmake git g++ \
     libglu1-mesa-dev ccache openssh-client openmpi-bin libopenmpi-dev \
     python3 libpython3-dev python3-pytest python3-numpy python3-sphinx python3-pip \
