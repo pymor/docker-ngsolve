@@ -1,9 +1,8 @@
 ARG PYVER
 
-FROM pymor/petsc:3.8.0 as petsclayer
+FROM pymor/petsc:py$PYVER as petsclayer
 
 ENV PETSC_DIR=/usr/local/petsc-32
-RUN ls -la ${PETSC_DIR}
 
 FROM pymor/python:$PYVER
 MAINTAINER René Milk <rene.milk@wwu.de>
@@ -12,7 +11,7 @@ ARG NGSOLVE_VERSION=v6.2.1709
 
 RUN apt-get update && \
     apt-get -y install libxmu-dev tk-dev tcl-dev cmake git g++ \
-    libglu1-mesa-dev ccache openssh-client mpich \
+    libglu1-mesa-dev ccache openssh-client openmpi-bin libopenmpi-dev \
     python3 libpython3-dev python3-pytest python3-numpy python3-sphinx python3-pip \
     liboce-ocaf-dev libsuitesparse-dev python3-tk && \
     pip3 install sphinx_rtd_theme
