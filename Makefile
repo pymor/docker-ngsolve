@@ -14,4 +14,4 @@ $(PYTHONS):
 push:
 	docker push pymor/ngsolve
 
-all: 3.5
+all: pythons
