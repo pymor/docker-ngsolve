@@ -22,6 +22,7 @@ ENV PATH="/opt/netgen/bin:${PATH}" \
 ENV PETSC_DIR=/usr/local/petsc-32
 COPY --from=petsclayer ${PETSC_DIR} ${PETSC_DIR}
 
+ADD catch.hpp /usr/local/include/
 # fake lsb-release to get ngsolve cmake to configure for deb package building
 RUN echo "DISTRIB_CODENAME=stretch" > /etc/lsb-release && \
     git clone https://github.com/NGSolve/ngsolve.git ${NGSOLVE_SRC_DIR} && \
