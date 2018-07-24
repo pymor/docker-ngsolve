@@ -8,6 +8,8 @@ FROM pymor/python:$PYVER
 MAINTAINER René Milk <rene.milk@wwu.de>
 
 ARG NGSOLVE_VERSION=v6.2.1709
+# if it's not repeated it's only usable in FROM
+ARG PYVER
 
 RUN apt-get update && \
     apt-get -y install libxmu-dev tk-dev tcl-dev cmake git g++ \
@@ -52,3 +54,14 @@ RUN echo "DISTRIB_CODENAME=stretch" > /etc/lsb-release && \
     mv ${NGSOLVE_BUILD_DIR}/ngsolve-*_amd64.deb /root/ && \
     rm -rf ${NGSOLVE_BUILD_DIR} ${NGSOLVE_SRC_DIR}
 
+RUN set -u ; \
+    echo "set -ex;\
+    ln -s /usr/lib/python${PYVER}/site-packages/ngsolve \
+          /usr/local/lib/python${PYVER}/site-packages/ngsolve && \
+    ln -s /usr/lib/python${PYVER}/site-packages/netgen \
+          /usr/local/lib/python${PYVER}/site-packages/netgen && \
+    mv /root/ngsolve-*_amd64.deb /tmp && apt update && apt install -y /tmp/ngsolve-*_amd64.deb && \
+    rm /tmp/ngsolve-*_amd64.deb" > /usr/local/bin/install_ngsolve.bash
+ONBUILD RUN set -u ; \
+     bash /usr/local/bin/install_ngsolve.bash \
+    python -c "import ngsolve"
