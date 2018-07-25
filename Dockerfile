@@ -53,15 +53,3 @@ RUN echo "DISTRIB_CODENAME=stretch" > /etc/lsb-release && \
     make package && \
     mv ${NGSOLVE_BUILD_DIR}/ngsolve-*_amd64.deb /root/ && \
     rm -rf ${NGSOLVE_BUILD_DIR} ${NGSOLVE_SRC_DIR}
-
-RUN set -u ; \
-    echo "set -ex;\
-    ln -s /usr/lib/python${PYVER}/site-packages/ngsolve \
-          /usr/local/lib/python${PYVER}/site-packages/ngsolve && \
-    ln -s /usr/lib/python${PYVER}/site-packages/netgen \
-          /usr/local/lib/python${PYVER}/site-packages/netgen && \
-    mv /root/ngsolve-*_amd64.deb /tmp && apt update && apt install -y /tmp/ngsolve-*_amd64.deb && \
-    rm /tmp/ngsolve-*_amd64.deb" > /usr/local/bin/install_ngsolve.bash
-ONBUILD RUN set -u ; \
-     bash /usr/local/bin/install_ngsolve.bash \
-    python -c "import ngsolve"
