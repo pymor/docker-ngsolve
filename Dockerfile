@@ -48,7 +48,7 @@ RUN echo "DISTRIB_CODENAME=stretch" > /etc/lsb-release && \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCPACK_PACKAGING_INSTALL_PREFIX=/usr \
     "-DCPACK_DEBIAN_PACKAGE_NAME=ngsolve${PACKAGE_NAME_SUFFIX}" && \
-    make && \
+    make -j "$(nproc)" && \
     cd ${NGSOLVE_BUILD_DIR} && \
     make package && \
     mv ${NGSOLVE_BUILD_DIR}/ngsolve-*_amd64.deb /root/ && \
