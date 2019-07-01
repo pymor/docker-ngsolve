@@ -7,7 +7,7 @@ NGSOLVE_VERSION=v6.2.1709
 pythons: $(PYTHONS)
 
 $(PYTHONS):
-	docker build --pull --build-arg PYVER=$@ \
+	docker build --build-arg PYVER=$@ \
 		--build-arg NGSOLVE_VERSION=$(NGSOLVE_VERSION) \
 		-t pymor/ngsolve:py$@_$(NGSOLVE_VERSION) .
 
