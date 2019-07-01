@@ -5,9 +5,9 @@ FROM pymor/petsc:py$PYVER as petsclayer
 ENV PETSC_DIR=/usr/local/petsc-32
 
 FROM pymor/python:$PYVER
-MAINTAINER René Milk <rene.milk@wwu.de>
+MAINTAINER René Fritze <rene.fritze@wwu.de>
 
-ARG NGSOLVE_VERSION=v6.2.1905
+ARG NGSOLVE_VERSION
 # if it's not repeated it's only usable in FROM
 ARG PYVER
 
@@ -26,7 +26,7 @@ COPY --from=petsclayer ${PETSC_DIR} ${PETSC_DIR}
 
 ADD catch.hpp /usr/local/include/
 # fake lsb-release to get ngsolve cmake to configure for deb package building
-RUN echo "DISTRIB_CODENAME=stretch" > /etc/lsb-release && \
+RUN echo "DISTRIB_CODENAME=buster" > /etc/lsb-release && \
     git clone https://github.com/NGSolve/ngsolve.git ${NGSOLVE_SRC_DIR} && \
     cd ${NGSOLVE_SRC_DIR} && \
     git checkout ${NGSOLVE_VERSION} && \
