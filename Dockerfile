@@ -7,7 +7,7 @@ ENV PETSC_DIR=/usr/local/petsc-32
 FROM pymor/python:$PYVER
 MAINTAINER René Milk <rene.milk@wwu.de>
 
-ARG NGSOLVE_VERSION=v6.2.1709
+ARG NGSOLVE_VERSION=v6.2.1905
 # if it's not repeated it's only usable in FROM
 ARG PYVER
 
