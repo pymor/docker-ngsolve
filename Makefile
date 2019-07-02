@@ -9,7 +9,7 @@ pythons: $(PYTHONS)
 $(PYTHONS):
 	docker build --build-arg PYVER=$@ \
 		--build-arg NGSOLVE_VERSION=$(NGSOLVE_VERSION) \
-		-t pymor/ngsolve:py$@_$(NGSOLVE_VERSION) .
+		-t pymor/ngsolve:py$@_$(NGSOLVE_VERSION) docker
 
 push:
 	docker push pymor/ngsolve
