@@ -40,7 +40,6 @@ RUN echo "DISTRIB_CODENAME=buster" > /etc/lsb-release && \
     -DUSE_OCC=ON \
     -DUSE_MPI=ON \
     -DUSE_HYPRE=ON \
-    -DHYPRE_DIR=${PETSC_DIR} \
     -DUSE_MUMPS=ON \
     -DOpenGL_GL_PREFERENCE=GLVND \
     -DUSE_CCACHE=OFF \
