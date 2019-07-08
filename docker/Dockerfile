@@ -19,9 +19,10 @@ RUN apt-get update && \
     pip3 install sphinx_rtd_theme
 ENV PATH="/opt/netgen/bin:${PATH}" \
     NGSOLVE_SRC_DIR=/root/src/ngsolve_src \
-    NGSOLVE_BUILD_DIR=/root/src/ngsolve_build
+    NGSOLVE_BUILD_DIR=/root/src/ngsolve_build \
+    PETSC_DIR=/usr/local/petsc-32
+ENV MUMPS_DIR=${PETSC_DIR}
 
-ENV PETSC_DIR=/usr/local/petsc-32
 COPY --from=petsclayer ${PETSC_DIR} ${PETSC_DIR}
 
 ADD catch.hpp /usr/local/include/
@@ -41,7 +42,6 @@ RUN echo "DISTRIB_CODENAME=buster" > /etc/lsb-release && \
     -DUSE_HYPRE=ON \
     -DHYPRE_DIR=${PETSC_DIR} \
     -DUSE_MUMPS=ON \
-    -DMUMPS_DIR=${PETSC_DIR} \
     -DOpenGL_GL_PREFERENCE=GLVND \
     -DUSE_CCACHE=OFF \
     -DUSE_MKL=OFF \
