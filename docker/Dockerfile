@@ -37,7 +37,13 @@ RUN echo "DISTRIB_CODENAME=buster" > /etc/lsb-release && \
     cmake ${NGSOLVE_SRC_DIR} \
     -DUSE_NATIVE_ARCH=OFF \
     -DUSE_OCC=ON \
-    -DUSE_CCACHE=ON \
+    -DUSE_MPI=ON \
+    -DUSE_HYPRE=ON \
+    -DHYPRE_DIR=${PETSC_DIR} \
+    -DUSE_MUMPS=ON \
+    -DMUMPS_DIR=${PETSC_DIR} \
+    -DOpenGL_GL_PREFERENCE=GLVND \
+    -DUSE_CCACHE=OFF \
     -DUSE_MKL=OFF \
     -DUSE_UMFPACK=ON \
     -DINSTALL_PROFILES=OFF \
