@@ -1,10 +1,12 @@
-ARG PYVER
+ARG PETSC_BASE
+ARG PYTHON_BASE
 
-FROM pymor/petsc:py$PYVER as petsclayer
+FROM $PETSC_BASE as petsclayer
 
 ENV PETSC_DIR=/usr/local/petsc-32
 
-FROM pymor/python:$PYVER
+FROM $PYTHON_BASE
+
 MAINTAINER René Fritze <rene.fritze@wwu.de>
 
 ARG NGSOLVE_VERSION
